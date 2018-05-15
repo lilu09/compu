@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://www.peppher.eu/ComponentMetaData0.1" 
+		xmlns:tns="http://www.peppher.eu/ComponentMetaData0.1" 
+		elementFormDefault="qualified">
+
+    <element name="component" type="tns:Component" nillable="true"></element>
+
+    <complexType name="Component">
+    	<sequence>
+    		<element name="interface" type="tns:Interface"
+    			minOccurs="0" maxOccurs="1">
+    		</element>
+    		<element name="implementation" type="tns:Implementation" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Interface">
+    	<sequence>
+    		<element ref="tns:description" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="parameters" type="tns:ParameterList"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="performanceAspects"
+    			type="tns:ComponentPerformanceAspects" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="genericParameters" type="tns:ParameterList" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+
+
+    	<attribute name="name" type="string"></attribute>
+	    <attribute name="impPath" type="string"></attribute>
+    	<attribute name="kind" type="tns:InterfaceKind"></attribute>
+    	<attribute name="templateTypes" type="string"></attribute>
+    	<attribute name="useHistoryModels" type="string"></attribute>
+    	<attribute name="disableCUDA" type="string"></attribute>
+    	<attribute name="disableCPU" type="string"></attribute>
+    	<attribute name="disableOpenCL" type="string"></attribute>
+    </complexType>
+
+    <complexType name="Implementation">
+    	<sequence>
+            <element name="sourceFiles" type="tns:SourceFiles" maxOccurs="1" minOccurs="1"></element>
+    		<element name="providedInterfaces" type="tns:ProvidedInterfaces" maxOccurs="1" minOccurs="1"></element>
+    		<element name="requiredInterfaces" type="tns:RequiredInterfaces" maxOccurs="1" minOccurs="0"></element>
+            <element name="performanceAspects" type="tns:PerformanceAspects" minOccurs="0" maxOccurs="1"></element>
+            <element name="targetPlatform" type="tns:TargetPlatform" minOccurs="1"></element>
+    		<element name="parameterConstraints" type="tns:ParameterConstraints" minOccurs="0" maxOccurs="1"></element>
+    		<element name="tunables" type="tns:Tunables" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="disable" type="string"></attribute>
+    </complexType>
+    
+    <complexType name="ProvidedInterface">
+    	<sequence>
+ 	   		<element ref="tns:genericProperty" maxOccurs="unbounded"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    </complexType>
+    
+    <complexType name="RequiredInterface">
+    	<sequence>
+   			<element ref="tns:genericProperty" maxOccurs="unbounded"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+	<attribute name="xmlFile" type="string"></attribute>
+    </complexType>
+    
+    <complexType name="SourceFile">
+        <sequence>
+            <element name="compilation" type="tns:Compilation"
+    			minOccurs="0" maxOccurs="unbounded">
+    		</element>
+        </sequence>
+        <attribute name="name" type="string"></attribute>
+		<attribute name="type" type="string"></attribute>
+		<attribute name="kernel" type="string"></attribute>
+        <attribute name="version" type="string"></attribute>
+        <attribute name="language" type="string" default=""></attribute>
+		<attribute name="starpu_opencl_program" type="string"></attribute>
+		<attribute name="cl_kernel" type="string"></attribute>
+		<attribute name="cl_command_queue" type="string"></attribute>
+    </complexType>
+
+    <complexType name="ParameterList">
+    	<sequence>
+    		<element name="parameter"
+    			type="tns:InterfaceParameter" maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="GenericProperty">
+    	<sequence>
+    		<element name="key" type="string"></element>
+    		<element name="value" type="anySimpleType"></element>
+    		<element name="defaultValue" type="anySimpleType" maxOccurs="1" minOccurs="0"></element>
+    		<element name="valueConstraint"
+    			type="tns:ValueConstraint" maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element ref="tns:description" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="genericProperty" type="tns:GenericProperty"></element>
+
+    <complexType name="InterfaceParameter">
+    	<sequence>
+    		<element ref="tns:description" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    	<attribute name="accessMode" type="tns:AccessMode"></attribute>
+		<attribute name="metaData" type="string"></attribute>
+		<attribute name="metaType" type="string"></attribute>
+		<attribute name="elemType" type="string"></attribute>
+		<attribute name="partition" type="string"></attribute>
+		<attribute name="numElements" type="string"></attribute>
+		<attribute name="descRowWidth" type="string"></attribute>
+		<attribute name="csr_nrows" type="string"></attribute>
+		<attribute name="csr_first" type="string"></attribute>
+		<attribute name="csr_row_offsets" type="string"></attribute>
+		<attribute name="csr_col_indices" type="string"></attribute>
+    </complexType>
+
+
+    <complexType name="Compilation">
+    	<sequence>
+    		<element name="compiler" type="tns:Compiler" minOccurs="0" maxOccurs="1"></element>
+    		<element name="language" type="string" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Compiler">
+    <!-- This needs to be carefully refined! only one compiler node may not be sufficient for many implementations -->
+    <sequence>
+    	<element name="name" type="string" minOccurs="0" maxOccurs="1"></element>
+    	<element name="version" type="string" minOccurs="0" maxOccurs="1"></element>
+    	<element name="flags" type="string" minOccurs="0" maxOccurs="1"></element>
+		<element name="output" type="string" minOccurs="0"></element>
+            <element ref="tns:genericProperty" maxOccurs="unbounded"
+    		minOccurs="0">
+    	</element>
+    </sequence>
+	<attribute name="type" type="string" ></attribute>
+    </complexType>
+
+    <complexType name="ValueConstraint">
+    	<sequence>
+    		<element name="comparator" type="tns:Comparator"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
+    		<element ref="tns:genericProperty" maxOccurs="unbounded"
+    			minOccurs="0">
+    		</element>
+    		<element name="steps" type="tns:Steps"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Comparator">
+    	<sequence>
+    		<element ref="tns:genericProperty"></element>
+    	</sequence>
+    	<attribute name="mode" type="string"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    </complexType>
+
+    <complexType name="TargetPlatform">
+    	<sequence>
+    		<element name="pdlRef" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="hardwareConstraints" type="tns:Constraints" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+
+    	<attribute name="progModel" type="string"></attribute>
+    	<attribute name="name" type="string"></attribute>
+    </complexType>
+
+    <attribute name="pdlRef" type="string"></attribute>
+
+
+
+    <complexType name="Constraint">
+    	<sequence>
+    		<element ref="tns:genericProperty" maxOccurs="unbounded"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    	<attribute name="name" type="string" use="required"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    	<attribute name="value" type="string"></attribute>
+    </complexType>
+    <element name="requirement" type="tns:Constraint"></element>
+
+    <complexType name="Constraints">
+    	<sequence>
+    		<element name="constraint" type="tns:Constraint" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Annotations">
+    	<sequence>
+    		<element name="annotation" type="tns:Annotation"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Annotation">
+    	<sequence>
+    		<element ref="tns:genericProperty"></element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    </complexType>
+    
+    <complexType name="Steps">
+    	<sequence>
+    		<element name="function" type="string"></element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="PerformanceAspects">
+    	<sequence>
+    		<element name="PerformanceAspect"
+    			type="tns:PerformanceAspect" maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="Tunables">
+    	<sequence>
+    		<element name="tunable" type="tns:Tunable"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Tunable">
+    	<sequence>
+    		<element ref="tns:genericProperty"></element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    </complexType>
+
+
+    <complexType name="ResourceContextDescriptor">
+    	<sequence>
+    		<element name="contextParameters" type="tns:ContextParameters" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    	<attribute ref="tns:pdlRef"></attribute>
+    </complexType>
+
+    <complexType name="InvocationContextDescriptor">
+    	<sequence>
+    		<element name="contextParameters" type="tns:ContextParameters" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PerformanceAspect">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="metric" type="string"></element>
+    		<element name="invocationContextDescriptor"
+    			type="tns:InvocationContextDescriptor" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="resourceContextDescriptor"
+    			type="tns:ResourceContextDescriptor" maxOccurs="1" minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    <element name="description" type="string"></element>
+
+    <complexType name="ComponentPerformanceAspect">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="metric" type="string"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    <simpleType name="InterfaceKind">
+    	<restriction base="string">
+    		<enumeration value="generic"></enumeration>
+    		<enumeration value="non-generic"></enumeration>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="ComponentPerformanceAspects">
+    	<sequence>
+    		<element name="performanceAspect" type="tns:ComponentPerformanceAspect" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="AccessMode">
+    	<restriction base="string">
+    		<enumeration value="read"></enumeration>
+    		<enumeration value="write"></enumeration>
+    		<enumeration value="readwrite"></enumeration>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="SourceFiles">
+    	<sequence>
+    		<element name="sourceFile" type="tns:SourceFile" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ProvidedInterfaces">
+    	<sequence>
+    		<element name="providedInterface" type="tns:ProvidedInterface" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="RequiredInterfaces">
+    	<sequence>
+    		<element name="requiredInterface" type="tns:RequiredInterface" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ParameterConstraints">
+    	<sequence>
+    		<element name="parameterConstraint" type="tns:Constraint" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="ContextParameters">
+    	<sequence>
+    		<element name="contextParameter" type="tns:ContextParameter" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    <complexType name="ContextParameter">
+    	<sequence>
+    		<element name="genericProperty" type="tns:GenericProperty" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="type" type="string"></attribute>
+    	<attribute name="value" type="string"></attribute>
+    </complexType>
+
+    
+    
+
+
+
+</schema>

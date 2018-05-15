@@ -1,0 +1,24 @@
+sequential
+real	1m47.806s
+user	1m40.340s
+sys	0m5.300s
+
+time make -j4
+real	0m31.676s
+user	1m57.312s
+sys	0m6.016s
+
+time make -j8
+real	0m29.158s
+user	3m29.468s
+sys	0m9.412s
+
+time make -j24
+real	0m28.210s
+user	3m30.176s
+sys	0m8.944s
+
+time make -j72
+real	0m28.664s
+user	3m32.424s
+sys	0m8.932s

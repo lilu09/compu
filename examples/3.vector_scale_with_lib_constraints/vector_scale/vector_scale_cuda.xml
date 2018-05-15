@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<peppher:component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:peppher="http://www.peppher.eu/ComponentMetaData0.1" 
+	xsi:schemaLocation="http://www.peppher.eu/ComponentMetaData0.1 ComponentMetaData.xsd" >
+
+	<peppher:implementation name="scale_cuda_func">
+
+		<peppher:sourceFiles>
+			<peppher:sourceFile name="vector_scale_cuda.cu" version="1.0" language="CUDA">
+				<peppher:compilation>
+					<peppher:compiler>
+						<peppher:name>nvcc</peppher:name>
+						<peppher:version></peppher:version>
+						<peppher:flags> --compiler-options -fpermissive </peppher:flags>
+					</peppher:compiler>
+				</peppher:compilation>
+			</peppher:sourceFile>
+		</peppher:sourceFiles>
+
+
+		<peppher:providedInterfaces>
+			<peppher:providedInterface name="vector_scale" />
+		</peppher:providedInterfaces>
+
+
+		<peppher:targetPlatform name="CUDA">
+		</peppher:targetPlatform>
+
+
+		<peppher:constraints>
+			<peppher:constraint name="GPU_availability" expr="xpdl::system::num_of_gpus > 0" />
+			<peppher:constraint name="Cublas_availability" expr="xpdl::is_installed{xpdl::system::libraries,xpdl_cublas_5_0}::value != 0" />
+		</peppher:constraints>
+	
+
+	</peppher:implementation>
+
+
+
+
+</peppher:component>

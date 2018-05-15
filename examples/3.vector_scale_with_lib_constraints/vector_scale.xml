@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<peppher:component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:peppher="http://www.peppher.eu/ComponentMetaData0.1" 
+ xsi:schemaLocation="http://www.peppher.eu/ComponentMetaData0.1 ComponentMetaData.xsd" >
+
+<peppher:interface name="vector_scale">
+  <peppher:parameters>
+    <peppher:parameter name="arr" type="float *" numElements="size" accessMode="readwrite" />
+    <peppher:parameter name="size" type="int" accessMode="read" />
+    <peppher:parameter name="factor" type="float" accessMode="read" />
+  </peppher:parameters>
+</peppher:interface>
+
+</peppher:component>
+

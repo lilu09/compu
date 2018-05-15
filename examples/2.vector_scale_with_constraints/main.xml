@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<peppher:component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:peppher="http://www.peppher.eu/ComponentMetaData0.1" 
+	xsi:schemaLocation="http://www.peppher.eu/ComponentMetaData0.1 ComponentMetaData.xsd" >
+
+	<peppher:implementation name="main">
+
+		<peppher:sourceFiles>
+			<peppher:sourceFile  version="1.0" language="C++">
+				<peppher:compilation>
+					<peppher:compiler type="link">
+						<peppher:name>g++</peppher:name>
+						<peppher:version>4.5</peppher:version>
+						<peppher:flags> $(LDFLAGS)</peppher:flags>
+						<peppher:output>main</peppher:output>
+					</peppher:compiler>
+				</peppher:compilation>
+			</peppher:sourceFile>
+
+			<peppher:sourceFile name="main.c" version="1.0" language="C++">
+				<peppher:compilation>
+					<peppher:compiler>
+						<peppher:name>g++</peppher:name>
+						<peppher:version>4.5</peppher:version>
+						<peppher:flags> -std=c++11 </peppher:flags>
+					</peppher:compiler>
+				</peppher:compilation>
+			</peppher:sourceFile>
+		</peppher:sourceFiles>
+
+		<peppher:providedInterfaces>
+			<peppher:providedInterface name="main" />
+		</peppher:providedInterfaces>
+
+		<peppher:requiredInterfaces>
+			<peppher:requiredInterface name="vector_scale" xmlFile="vector_scale.xml" />
+		</peppher:requiredInterfaces>
+
+		<peppher:targetPlatform name="CPU" >
+		</peppher:targetPlatform>
+
+
+
+
+	</peppher:implementation>
+
+
+
+</peppher:component>
+

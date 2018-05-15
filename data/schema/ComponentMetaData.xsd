@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.peppher.eu/ComponentMetaData0.1" 
+	xmlns:tns="http://www.peppher.eu/ComponentMetaData0.1" 
+	elementFormDefault="qualified">
+
+	<element name="component" type="tns:Component" nillable="true"></element>
+
+	<complexType name="Component">
+<!--{{{-->
+		<sequence>
+			<element name="interface" type="tns:Interface"
+				minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="implementation" type="tns:Implementation" maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+<!--}}}-->
+
+	<complexType name="Interface">
+<!--{{{-->
+<!--{{{-->
+		<sequence>
+			<element name="parameters" type="tns:ParameterList"
+				maxOccurs="1" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="impPath" type="string"></attribute>
+		<attribute name="disableCUDA" type="string"></attribute>
+		<attribute name="disableCPU" type="string"></attribute>
+		<attribute name="disableOpenCL" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+
+	<complexType name="ParameterList">
+<!--{{{-->
+		<sequence>
+			<element name="parameter"
+				type="tns:InterfaceParameter" maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+<!--}}}-->
+
+	<complexType name="InterfaceParameter">
+<!--{{{-->
+		<attribute name="name" type="string"></attribute>
+		<attribute name="type" type="string"></attribute>
+		<attribute name="accessMode" type="tns:AccessMode"></attribute>
+		<attribute name="numElements" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+
+	<simpleType name="AccessMode">
+<!--{{{-->
+		<restriction base="string">
+			<enumeration value="read"></enumeration>
+			<enumeration value="write"></enumeration>
+			<enumeration value="readwrite"></enumeration>
+		</restriction>
+	</simpleType>
+<!--}}}-->
+<!--}}}-->
+
+	<complexType name="Implementation">
+<!--{{{-->
+<!--{{{-->
+		<sequence>
+			<element name="sourceFiles" type="tns:SourceFiles" maxOccurs="1" minOccurs="1"></element>
+			<element name="providedInterfaces" type="tns:ProvidedInterfaces" maxOccurs="1" minOccurs="1"></element>
+			<element name="requiredInterfaces" type="tns:RequiredInterfaces" maxOccurs="1" minOccurs="0"></element>
+			<element name="targetPlatform" type="tns:TargetPlatform" minOccurs="1"></element>
+			<element name="constraints" type="tns:Constraints" minOccurs="0"></element>
+		</sequence>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="disable" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+
+
+	<complexType name="SourceFiles">
+<!--{{{-->
+		<sequence>
+			<element name="sourceFile" type="tns:SourceFile" maxOccurs="unbounded" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SourceFile">
+<!--{{{-->
+		<sequence>
+			<element name="compilation" type="tns:Compilation"
+				minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="type" type="string"></attribute>
+		<attribute name="kernel" type="string"></attribute>
+		<attribute name="version" type="string"></attribute>
+		<attribute name="language" type="string" default=""></attribute>
+		<attribute name="starpu_opencl_program" type="string"></attribute>
+		<attribute name="cl_kernel" type="string"></attribute>
+		<attribute name="cl_command_queue" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+
+	<complexType name="Compilation">
+<!--{{{-->
+		<sequence>
+			<element name="compiler" type="tns:Compiler" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+<!--}}}-->
+
+	<complexType name="Compiler">
+<!--{{{-->
+		<!-- This needs to be carefully refined! only one compiler node may not be sufficient for many implementations -->
+		<sequence>
+			<element name="name" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="version" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="flags" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="output" type="string" minOccurs="0"></element>
+		</sequence>
+		<attribute name="type" type="string" ></attribute>
+	</complexType>
+<!--}}}-->
+
+<!--}}}-->
+
+	<complexType name="ProvidedInterfaces">
+<!--{{{-->
+		<sequence>
+			<element name="providedInterface" type="tns:ProvidedInterface" maxOccurs="unbounded" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ProvidedInterface">
+<!--{{{-->
+		<attribute name="name" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+<!--}}}-->
+
+	<complexType name="RequiredInterfaces">
+<!--{{{-->
+		<sequence>
+			<element name="requiredInterface" type="tns:RequiredInterface" maxOccurs="unbounded" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RequiredInterface">
+<!--{{{-->
+		<attribute name="name" type="string"></attribute>
+		<attribute name="xmlFile" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+<!--}}}-->
+
+	<complexType name="TargetPlatform">
+<!--{{{-->
+		<sequence>
+			<element name="hardwareConstraints" type="tns:Constraints" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+
+		<attribute name="name" type="string"></attribute>
+	</complexType>
+<!--}}}-->
+<!--}}}-->
+
+	<complexType name="Constraints">
+<!--{{{-->
+		<sequence>
+			<element name="constraint" type="tns:Constraint" maxOccurs="unbounded" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Constraint">
+<!--{{{-->
+		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="type" type="tns:Constraint_Type" default="static"></attribute>
+		<attribute name="expr" type="string" use="required"></attribute>
+	</complexType>
+
+	<simpleType name="Constraint_Type">
+		<restriction base="string">
+			<enumeration value="static" />
+			<enumeration value="dynamic" />
+		</restriction>
+	</simpleType>
+<!--}}}-->
+
+<!--}}}-->
+
+
+
+</schema>
