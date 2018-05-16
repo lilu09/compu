@@ -1,1 +1,11 @@
 ComPU is a composition tool, to control the composition of components on GPU-based heterogeneous systems. It use StarPU for run-time management.
+
+Installation Guide:
+
+1. Install StarPU
+
+2. Install Xerces
+
+3. go to src, change the installation path in Makefile
+
+4. 

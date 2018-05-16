@@ -23,9 +23,9 @@ USR_INC_SEARCH_PATH=common/ error/ infoHolder/ infoHolder/cg_helpers/ init/ main
 #EL=-L/home/lu/Documents/Research/research_original_data/YearlyData/2016/001.HipeacConference/2.Demo/1.CompositionTool/1.dependency/install/lib -lxerces-c
 
 
-#if you don't want makefile to track the header changes, list the headers in EC instead
-EC+=-I /home/lu/Documents/Project/XPDL/xpdl_project/lu_build/xercesc/include
-EL=-L/home/lu/Documents/Project/XPDL/xpdl_project/lu_build/xercesc/lib -lxerces-c
+#Please change your xercesc path here
+EC+=-I /home/lu/Documents/Xerces/install/include
+EL=-L/home/lu/Documents/Xerces/install/lib -lxerces-c
 #RP=sudo #Running Prefix
 #EF=$(PCM_SRC)/cpucounters.cpp #Extra Files
 #EXCLUDE_SRC_FILES=funcallsample.cpp
