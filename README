@@ -8,4 +8,15 @@ Installation Guide:
 
 3. go to src, change the installation path in Makefile
 
-4. make
+4. type 'make'
+
+5. set the following environment variables for ComPU:
+
+export CT_HOME=YOUR_COMPU_PATH
+export PATH=${CT_HOME}/src:$PATH
+
+6. set the following environment variables for StarPU:
+
+export PKG_CONFIG_PATH=YOUR_STARPU_INSTALL_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
+export PATH=YOUR_STARPU_INSTALL_PATH/bin:$PATH
+export LD_LIBRARY_PATH=YOUR_STARPU_INSTALL_PATH/lib:$LD_LIBRARY_PATH
