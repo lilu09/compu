@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <SkePU++.h>
+#include <compose.h>
 #include <static_constraint_evaluator.hpp>
 #include <methods.h>
 

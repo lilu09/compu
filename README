@@ -8,4 +8,4 @@ Installation Guide:
 
 3. go to src, change the installation path in Makefile
 
-4. 
+4. make
