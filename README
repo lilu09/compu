@@ -24,3 +24,6 @@ export LD_LIBRARY_PATH=YOUR_STARPU_INSTALL_PATH/lib:$LD_LIBRARY_PATH
 7. run XDPL compiler to generate xpdl.hpp
 
 8. modify compu/src/static_constraint_eval/static_constraint_evaluator.sh for the path of src folder of XPDL directory
+
+9. now run compose main.xml in compu/examples/2.vector_scale_with_constraints,
+	depends on if GPU is found or not in XPDL models, the GPU component will be enabled or disabled automatically.
