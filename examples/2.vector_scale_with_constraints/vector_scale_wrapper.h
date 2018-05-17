@@ -53,6 +53,23 @@
  }
 
 
+ extern void scale_cuda_func( float * arr, int size, float factor);
+
+
+
+
+ void scale_cuda_func_wrapper (void *buffers[], void *_args)
+ {
+ /* peppher container declarations, if any */
+
+
+ scale_cuda_func (
+  (float *)STARPU_VECTOR_GET_PTR( (struct starpu_vector_interface *)buffers[0]),STARPU_VECTOR_GET_NX( (struct starpu_vector_interface *)buffers[0]),((ROA_vector_scale *)_args)->factor
+ );
+
+ }
+
+
  void vector_scale (  float * arr, int size, float factor )
  {
  static ROA_vector_scale arg_vector_scale;
@@ -72,13 +89,15 @@
 
  if(! objSt_vector_scale->cl_vector_scale_init ) // codelete initialization only once, at first invocation
  {
- objSt_vector_scale->cl_vector_scale.where =0|STARPU_CPU;
+ objSt_vector_scale->cl_vector_scale.where =0|STARPU_CPU|STARPU_CUDA;
 
  objSt_vector_scale->cl_vector_scale.cpu_funcs[0]=scale_cpu_func_wrapper;
 objSt_vector_scale->cl_vector_scale.cpu_funcs[1]=NULL;
 
 
-  
+ objSt_vector_scale->cl_vector_scale.cuda_funcs[0]=scale_cuda_func_wrapper;
+objSt_vector_scale->cl_vector_scale.cuda_funcs[1]=NULL;
+
 
   
 
