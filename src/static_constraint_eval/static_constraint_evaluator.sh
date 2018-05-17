@@ -34,6 +34,8 @@ echo ");
 
 
 #g++ -O3 -I /home/lu/Documents/Research/research_original_data/YearlyData/2016/001.HipeacConference/2.Demo/2.XPDL/2.my/ engine.cpp -std=c++11 -o engine &> /dev/null
-g++ -O3 -I /home/lu/Documents/Project/XPDL/xpdl_project/src engine.cpp -std=c++11 -o engine &> /dev/null
+
+# Please modify the -I path to be the src folder of your XPDL path, XPDL compiler must run before ComPU can run, so that xpdl.hpp is already generated
+g++ -O3 -I /home/lu/Downloads/framework_integration/xpdl_compiler/src engine.cpp -std=c++11 -o engine > /dev/null
 echo `./engine`
 rm engine engine.cpp

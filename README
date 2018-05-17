@@ -20,3 +20,7 @@ export PATH=${CT_HOME}/src:$PATH
 export PKG_CONFIG_PATH=YOUR_STARPU_INSTALL_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
 export PATH=YOUR_STARPU_INSTALL_PATH/bin:$PATH
 export LD_LIBRARY_PATH=YOUR_STARPU_INSTALL_PATH/lib:$LD_LIBRARY_PATH
+
+7. run XDPL compiler to generate xpdl.hpp
+
+8. modify compu/src/static_constraint_eval/static_constraint_evaluator.sh for the path of src folder of XPDL directory

@@ -32,7 +32,7 @@ EL=-L/home/lu/Documents/Xerces/install/lib -lxerces-c
 #ERP:=1 2
 
 #DEBUG=BATCH
-#DEBUG=INTERACTIVE
+DEBUG=INTERACTIVE
 #DEBUG=BACK_TRACE
 
 #PROFILE=true
